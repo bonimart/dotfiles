@@ -206,8 +206,8 @@ assign [class="firefox"]  $ws2
 assign [class="Slack"]    $ws3
 assign [class="discord"]  $ws4
 assign [class="Spotify"]  $ws5
-assign [class="code"]     $ws6
-assign [class="chromium"] $ws7
+assign [class="Code"]     $ws6
+assign [class="Chromium"] $ws7
 
 # Pop-up windows compatibility
 for_window [window_role="pop-up"] floating enable
@@ -229,3 +229,5 @@ exec --no-startup-id /usr/lib/kdeconnectd
 exec --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
 # picom
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
+# window borders - removed title since it's in the bar
+default_border pixel 2
