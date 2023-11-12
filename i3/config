@@ -219,7 +219,6 @@ assign [class="obsidian"] $ws8
 # Pop-up windows compatibility
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
-for_window [class="spectacle"] floating enable
 
 # gaps between windows
 gaps inner 3
@@ -227,14 +226,16 @@ gaps outer 3
 smart_gaps inverse_outer
 
 # keyboard layout
-exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle' -layout us,cz -variant ,qwerty"
+# exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle' -layout us,cz -variant ,qwerty"
 
 # KDE Connect
 exec --no-startup-id /usr/lib/kdeconnectd
 
-# load wallpaper
-exec --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
 # picom
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 # window borders - removed title since it's in the bar
 default_border pixel 2
+# japanese keyboard
+exec --no-startup-id fcitx5 -d
+# load wallpaper
+exec --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
