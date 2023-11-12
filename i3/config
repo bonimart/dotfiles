@@ -44,14 +44,17 @@ exec --no-startup-id betterlockscreen -w dim
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id [ $(pamixer --get-volume) -lt 150 ] && pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+set $VOL_STEP 5
+set $BRIGHTNESS_STEP 5
+set $BRIGHTNESS_MIN 48
+bindsym XF86AudioRaiseVolume exec --no-startup-id [ $(($(pamixer --get-volume) + $VOL_STEP)) -le 150 ] && pactl set-sink-volume @DEFAULT_SINK@ +$VOL_STEP% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -$VOL_STEP% && $refresh_i3status
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
-bindsym XF86MonBrightnessDown exec --no-startup-id [ $(brightnessctl get) -gt 960 ] && brightnessctl set 5%-
-bindsym Print exec --no-startup-id spectacle -r
-bindsym Shift+Print exec --no-startup-id spectacle -f
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --exponent=2 set +$BRIGHTNESS_STEP%
+bindsym XF86MonBrightnessDown exec --no-startup-id [ $(brightnessctl get) -gt $BRIGHTNESS_MIN ] && brightnessctl --exponent=2 set $BRIGHTNESS_STEP%-
+bindsym Print exec --no-startup-id spectacle -rcb
+bindsym Shift+Print exec --no-startup-id spectacle -fcb
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
