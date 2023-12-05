@@ -83,6 +83,7 @@ plugins=(git
 	zoxide
 	zsh-autosuggestions
 	zsh-syntax-highlighting
+    zsh-vi-mode
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -90,7 +91,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="$PATH:$HOME/.local/bin"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -130,11 +130,30 @@ PERL_LOCAL_LIB_ROOT="/home/boni/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_RO
 PERL_MB_OPT="--install_base \"/home/boni/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/boni/perl5"; export PERL_MM_OPT;
 
-alias ml="source ~/.venv/ml/bin/activate"
-alias aima="source ~/.venv/aima/bin/activate"
+# python virtualenv wrapper
+VENV_DIR="$HOME/.venv"
+function workon () {
+    USAGE="Usage: workon [VIRTUAL_ENVIRONMENT]"
+
+    if (( $# != 1 )) 
+    then echo "$0: invalid number of parameters\n$USAGE"; fi
+
+    source "$VENV_DIR/$1/bin/activate"
+}
+
 alias blue="bluetuith"
 # https://github.com/catppuccin/fzf
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+# highlighting for --help
+alias bathelp='bat --plain --language=help'
+help() {
+    "$@" --help 2>&1 | bathelp
+}
+alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
+# bat as a MAN pager
+# catppuccin theme is not supported for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Monokai\ Extended'"
+export MANROFFOPT="-c"
