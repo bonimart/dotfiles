@@ -53,8 +53,12 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --exponent=2 set +$BRIGHTNESS_STEP%
 bindsym XF86MonBrightnessDown exec --no-startup-id [ $(brightnessctl get) -gt $BRIGHTNESS_MIN ] && brightnessctl --exponent=2 set $BRIGHTNESS_STEP%-
-bindsym Print exec --no-startup-id spectacle -rcb
-bindsym Shift+Print exec --no-startup-id spectacle -fcb
+# take a screenshot of a selection, copy it to the clipboard
+bindsym --release Print exec --no-startup-id screen
+# take a screenshot of the desktop, copy it to the clipboard
+bindsym --release Shift+Print exec --no-startup-id fullscreen
+# take a screenshot of a selection, perform OCR on it, copy the text to the clipboard
+bindsym --release Ctrl+Print exec --no-startup-id screen-ocr
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
