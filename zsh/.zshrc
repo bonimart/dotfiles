@@ -140,6 +140,9 @@ function workon () {
 
     source "$VENV_DIR/$1/bin/activate"
 }
+function mkvenv () {
+    python3 -m venv "$VENV_DIR/$1"
+}
 
 alias blue="bluetuith"
 # https://github.com/catppuccin/fzf
