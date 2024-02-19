@@ -172,6 +172,8 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# move workspaces between monitors
+bindsym $mod+x move workspace to output next
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -201,6 +203,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
 
 # ranger
 bindsym $mod+Shift+f exec kitty ranger
@@ -235,6 +238,9 @@ smart_gaps inverse_outer
 # KDE Connect
 exec --no-startup-id /usr/lib/kdeconnectd
 
+
+exec --no-startup-id xset dpms 0 0 3600
+
 # picom
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
 # window borders - removed title since it's in the bar
@@ -243,3 +249,4 @@ default_border pixel 2
 exec --no-startup-id fcitx5 -d
 # load wallpaper
 exec --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
+
