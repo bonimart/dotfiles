@@ -120,7 +120,7 @@ source /usr/share/nvm/init-nvm.sh
 # Fuck
 eval "$(thefuck --alias)"
 # Zoxide
-eval "$(zoxide init zsh)"
+eval "$(zoxide init --cmd 'cd' zsh)"
 # .NET
 PATH="$PATH:$HOME/.dotnet/tools"
 
