@@ -238,8 +238,10 @@ smart_gaps inverse_outer
 # KDE Connect
 exec --no-startup-id /usr/lib/kdeconnectd
 
-
-exec --no-startup-id xset dpms 0 0 3600
+# disable screen turning off
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
 
 # picom
 exec --no-startup-id picom --config ~/.config/picom/picom.conf -b
