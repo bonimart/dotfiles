@@ -250,5 +250,5 @@ default_border pixel 2
 # japanese keyboard
 exec --no-startup-id fcitx5 -d
 # load wallpaper
-exec --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
+exec_always --no-startup-id feh --bg-scale "$HOME/.local/share/wallpapers/sunset.png"
 
