@@ -162,3 +162,6 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 # catppuccin theme is not supported for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p --theme=Monokai\ Extended'"
 export MANROFFOPT="-c"
+
+
+export GOPATH="$HOME/.go"
