@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+PATH=$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -165,3 +165,7 @@ export MANROFFOPT="-c"
 
 
 export GOPATH="$HOME/.go"
+export WINIT_UNIX_BACKEND=wayland
+
+# rust
+PATH="$HOME/.cargo/bin:$PATH"
