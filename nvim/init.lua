@@ -1,5 +1,8 @@
 require("boni")
 
+-- https://askubuntu.com/questions/1486871/how-can-i-copy-and-paste-outside-of-neovim
+vim.api.nvim_set_option("clipboard", "unnamed")
+
 -- lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
