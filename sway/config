@@ -10,11 +10,13 @@ font pango:MesloLGS NF, FontAwesome 9
 bar {
      swaybar_command waybar
 }
-# keyboard layour
+# keyboard layout
 input "*" {
     xkb_layout "cz"
     xkb_variant "coder"
+    xkb_options "caps:escape"
 }
+
 # monitor settings
 output "*" bg "~/.local/share/wallpapers/sunset.png" fill
 # output "*" resolution 1920x1080
@@ -54,8 +56,7 @@ exec /usr/lib/polkit-kde-authentication-agent-1
 bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ $VOL_STEP%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ $VOL_STEP%-
 bindsym XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && \
-    /home/boni/.local/bin/switch-headset-bt-profile
+bindsym XF86AudioMicMute exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
 # -----------------------------------------------------------------------------
 # Brightness control
 # -----------------------------------------------------------------------------
