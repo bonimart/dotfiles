@@ -100,7 +100,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Preferred editor for local and remote sessions
 alias vim="nvim"
 
-EDITOR="nvim"
+export EDITOR="nvim"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -112,6 +112,16 @@ EDITOR="nvim"
 # Example aliases
 alias zshconfig="$EDITOR ~/.zshrc"
 alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
