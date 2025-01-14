@@ -155,7 +155,7 @@ function mkvenv () {
 }
 
 # user defined aliases
-alias blue="bluetuith"
+alias blue="bluetui"
 alias todo="todoist-cli"
 # https://github.com/catppuccin/fzf
 export FZF_DEFAULT_OPTS=" \
