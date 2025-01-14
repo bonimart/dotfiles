@@ -1,0 +1,148 @@
+@import "mocha.css";
+
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, MesloLGS NF;
+    font-size: 15px;
+    color: @text;
+}
+
+window#waybar {
+    background-color: shade(@base, 0.9);
+    color: @text;
+    border:  0px solid alpha(@crust, 0.3);
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+    box-shadow: inset 0 -3px @text;
+}
+
+#workspaces button {
+    padding: 0 12px;
+    background-color: transparent;
+    color: @text;
+}
+
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+    background-color: @surface1;
+    box-shadow: inset 0 -3px @text;
+}
+
+#workspaces button.urgent {
+    background-color: shade(@teal, 0.5);
+}
+
+#mode {
+    box-shadow: inset 0 -3px @text;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#backlight,
+#network,
+#wireplumber,
+#tray {
+    padding: 0 10px;
+}
+
+#window,
+#workspaces {
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+}
+
+#battery.charging, #battery.plugged {
+    color: @lavender;
+}
+
+#battery.warning {
+    color: @yellow;
+    background-color: @base;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+@keyframes blink {
+    to {
+        background-color: @base;
+        color: @text;
+    }
+}
+
+#cpu {
+}
+
+#memory {
+}
+
+#backlight {
+}
+
+#network {
+}
+
+#network.disconnected {
+    color: @yellow;
+}
+
+#wireplumber.muted {
+    color: @yellow;
+}
+
+#tray {
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+#keyboard-state {
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    color: @yellow;
+}
+
