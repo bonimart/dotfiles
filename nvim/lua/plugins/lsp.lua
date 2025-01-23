@@ -23,7 +23,7 @@ return {
                 'vimls',
                 'mdx_analyzer',
                 'bashls',
-                'pylsp',
+                'pylsp'
             },
             handlers = {
                 function(server_name)
