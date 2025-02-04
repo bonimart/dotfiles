@@ -23,25 +23,22 @@ return {
                 'vimls',
                 'mdx_analyzer',
                 'bashls',
-                'pylsp'
+                'pyright',
+                'ruff',
             },
             handlers = {
                 function(server_name)
                     require('lspconfig')[server_name].setup({})
                 end,
-                pylsp = function()
-                    require('lspconfig').pylsp.setup({
+                pyright = function()
+                    require('lspconfig').pyright.setup({
                         settings = {
-                            pylsp = {
-                                plugins = {
-                                    ruff = {
-                                        enabled = true,
-                                        formatEnabled = true
-                                    },
-                                    mypy = {
-                                        enabled = true,
-                                        live_mode = true
-                                    }
+                            pyright = {
+                                disableOrganizeImports = true,
+                            },
+                            python = {
+                                analysis = {
+                                    ignore = { '*' },
                                 }
                             }
                         }
@@ -112,7 +109,7 @@ return {
 
         lsp.format_on_save({
             servers = {
-                ['pylsp'] = {'python'}
+                ['ruff'] = {'python'}
             }
         })
 
