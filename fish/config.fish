@@ -26,7 +26,7 @@ end
 # git aliases
 abbr gst 'git status'
 abbr ga 'git add'
-abbr gc 'git commit'
+abbr gc 'git commit --verbose'
 abbr gb 'git branch'
 abbr gco 'git checkout'
 abbr gcb 'git checkout -b'
@@ -37,3 +37,4 @@ abbr gp 'git push'
 abbr gl 'git pull'
 alias grep rg
 alias cd z
+alias vim nvim
