@@ -25,6 +25,8 @@ return {
                 'bashls',
                 'pyright',
                 'ruff',
+                'yamlls',
+                'helm_ls',
             },
             handlers = {
                 function(server_name)
@@ -50,6 +52,17 @@ return {
                             Lua = {
                                 diagnostics = {
                                     globals = {'vim'}
+                                }
+                            }
+                        }
+                    })
+                end,
+                helm_ls = function()
+                    require('lspconfig').helm_ls.setup({
+                        settings = {
+                            ['helm-ls'] = {
+                                yamlls = {
+                                    path = "yaml-language-server",
                                 }
                             }
                         }
