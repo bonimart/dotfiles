@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
-	config = true,
+    opts ={},
 	keys = {
 		{ "<leader>ha", function () require('harpoon.mark').add_file() end, desc = "Mark file with harpoon" },
 		{ "<leader>hd", function () require('harpoon.mark').rm_file() end, desc = "Unmark file with harpoon" },
