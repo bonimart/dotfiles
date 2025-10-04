@@ -1,38 +1,28 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    lazy = false,
-    build=":TSUpdate",
-    config = function ()
-        local configs = require("nvim-treesitter.configs")
-
-        configs.setup({
-            ensure_installed = {
-                "vimdoc",
-                "lua",
-                "python",
-                "markdown",
-                "markdown_inline",
-                "rust",
-                "bash",
-                "query",
-            },
-            sync_install = false,
-            auto_install = true,
-            highlight = {
-                enable = true,
-                disable = function(lang, buf)
-                    local max_filesize = 100 * 1024 -- 100 KB
-                    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                    if ok and stats and stats.size > max_filesize then
-                        return true
-                    end
-                end,
-                additional_vim_regex_highlighting = false,
-            },
+    build = ":TSUpdate",
+    -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
+    opts = {
+        ensure_installed = {
+            "python",
+            "rust",
+            "bash",
+        }
+    },
+    config = function(_, opts)
+        TS = require("nvim-treesitter")
+        TS.install(opts.ensure_installed)
+        vim.api.nvim_create_autocmd('FileType', {
+            pattern = opts.ensure_installed,
+            callback = function()
+                -- syntax highlighting, provided by Neovim
+                vim.treesitter.start()
+                -- folds, provided by Neovim
+                vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+                -- indentation, provided by nvim-treesitter
+                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            end,
         })
-
-        vim.treesitter.language.register('markdown', 'mdx')
-
-    end
+    end,
 }
