@@ -1,3 +1,3 @@
 return {
-    'github/vuciv/golf'
+    'vuciv/golf'
 }
