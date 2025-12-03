@@ -8,7 +8,7 @@ return {
         opts = {
             ensure_installed = {
                 'ruff',
-                'pyright'
+                'ty'
             }
         },
         dependencies = {
