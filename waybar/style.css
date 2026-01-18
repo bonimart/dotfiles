@@ -96,11 +96,6 @@ window#waybar.hidden {
     border-radius: 15px;
 }
 
-#battery.charging, #battery.plugged {
-    color: @lavender;
-    animation: none;
-}
-
 #battery.warning {
     color: @yellow;
 }
@@ -112,6 +107,11 @@ window#waybar.hidden {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#battery.charging, #battery.plugged {
+    color: @lavender;
+    animation: none;
 }
 
 @keyframes blink {
