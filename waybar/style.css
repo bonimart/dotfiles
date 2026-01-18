@@ -5,126 +5,78 @@
     font-family: FontAwesome, MesloLGS NF;
     font-size: 15px;
     color: @text;
+    border: none;
+	border-radius: 0;
+    min-height: 0;
+	padding: 0;
+	margin: 0;
 }
 
 window#waybar {
-    background-color: shade(@base, 0.9);
+    border-bottom: none;
     color: @text;
-    border:  0px solid alpha(@crust, 0.3);
-    transition-property: background-color;
-    transition-duration: .5s;
+    background-color: transparent;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
 
-button {
+.modules-right {
+    transition: all 0.3s ease;
+}
+
+.modules-right * {
+    padding: 2px 10px;
+}
+
+/*
+ * Workspaces
+*/ 
+
+#workspaces {
+
+}
+
+#workspaces button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
     /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
+    padding: 0 12px;
+    color: @text;
+    transition: background-color 0.3s ease;
 }
+
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
+#workspaces button:hover {
     background: inherit;
     box-shadow: inset 0 -3px @text;
-}
-
-#workspaces button {
-    padding: 0 12px;
-    background-color: transparent;
-    color: @text;
-}
-
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 #workspaces button.active {
     background-color: @surface1;
-    box-shadow: inset 0 -3px @text;
+    box-shadow: inset 0 -3px @blue;
+    color: @blue;
 }
 
 #workspaces button.urgent {
-    background-color: shade(@teal, 0.5);
+    background-color: @red;
+    color: @base;
 }
 
-#mode {
-    box-shadow: inset 0 -3px @text;
+#tray menu {
+    background-color: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 10px;
+    
 }
 
-#clock,
-#battery,
-#cpu,
-#memory,
-#backlight,
-#network,
-#wireplumber,
-#tray {
-    padding: 0 10px;
-}
-
-#window,
-#workspaces {
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#clock {
-}
-
-#battery.charging, #battery.plugged {
-    color: @lavender;
-}
-
-#battery.warning {
-    color: @yellow;
-    background-color: @base;
-}
-
-#battery.critical {
-    color: @red;
-}
-
-@keyframes blink {
-    to {
-        background-color: @base;
-        color: @text;
-    }
-}
-
-#cpu {
-}
-
-#memory {
-}
-
-#backlight {
-}
-
-#network {
-}
-
-#network.disconnected {
-    color: @yellow;
-}
-
-#wireplumber.muted {
-    color: @yellow;
-}
-
-#tray {
+#tray menu menuitem:hover {
+    background-color: @surface1;
 }
 
 #tray > .passive {
@@ -135,14 +87,87 @@ button:hover {
     -gtk-icon-effect: highlight;
 }
 
-#keyboard-state {
+#idle_inhibitor {
+    color: @subtext1;
+}
+#idle_inhibitor.activated {
+    background-color: @surface1;
+    color: @blue;
+    border-radius: 15px;
 }
 
-#keyboard-state > label {
-    padding: 0 5px;
+#battery.charging, #battery.plugged {
+    color: @lavender;
+    animation: none;
 }
 
-#keyboard-state > label.locked {
+#battery.warning {
     color: @yellow;
 }
 
+#battery.critical {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        color: @base;
+    }
+}
+
+tooltip {
+    background: @base;       
+    opacity: 1.0;            
+    border-radius: 10px;     
+    border: 1px solid @surface0;
+}
+
+tooltip label {
+    color: @text;
+}
+
+#hardware #cpu {
+    padding: 0 5px;
+}
+
+#hardware #memory {
+    padding: 0 5px;
+}
+
+#hardware #battery {
+    padding: 0 5px;
+}
+
+#backlight-slider {
+    min-width: 75px;
+}
+
+#backlight-slider * {
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide slider */
+#backlight-slider slider {
+    min-height: 0px;
+    min-width: 0px;
+    opacity: 0;
+    background-image: none;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#backlight-slider trough {
+    min-height: 8px;
+    border-radius: 2px;
+}
+#backlight-slider highlight {
+    border-radius: 2px;
+    background: @blue;
+}
