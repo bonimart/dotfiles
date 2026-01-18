@@ -37,4 +37,3 @@ abbr gp 'git push'
 abbr gl 'git pull'
 alias grep rg
 alias cd z
-alias vim nvim
