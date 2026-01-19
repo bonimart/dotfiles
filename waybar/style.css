@@ -68,6 +68,10 @@ window#waybar.hidden {
     color: @base;
 }
 
+window.popup decoration {
+    box-shadow: none;
+}
+
 #tray menu {
     background-color: @surface0;
     border: 1px solid @surface1;
