@@ -10,6 +10,7 @@ return {
             return {
                 -- stylua: ignore start
                 { "<leader>d", group = "  Debug" },
+                { "<leader>da", function() dap.continue({ before = get_args }) end, desc = "Run with Args", },
                 { "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition", },
                 { "<leader>db", function() dap.toggle_breakpoint() end, desc = "Toggle Breakpoint", },
                 { "<leader>dc", function() dap.continue() end, desc = "Continue", },
