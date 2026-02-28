@@ -8,13 +8,35 @@ return {
         opts = {
             ensure_installed = {
                 'ruff',
-                'ty'
+                'ty',
+                'gopls',
             }
         },
         dependencies = {
             'mason-org/mason.nvim',
             'neovim/nvim-lspconfig',
         },
+    },
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                python = {
+                    -- To fix auto-fixable lint errors.
+                    "ruff_fix",
+                    -- To run the Ruff formatter.
+                    "ruff_format",
+                    -- To organize the imports.
+                    "ruff_organize_imports",
+                },
+                go = { "goimports", "gofmt" }
+            },
+            format_on_save = {
+                -- These options will be passed to conform.format()
+                timeout_ms = 500,
+                lsp_format = "last",
+            },
+        }
     },
     {
         'hrsh7th/nvim-cmp',
@@ -32,9 +54,9 @@ return {
                     end,
                 },
                 mapping = cmp.mapping.preset.insert({
-                    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-                    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-                    ['<CR>']  = cmp.mapping.confirm({ select = true }),
+                    ['<C-p>']     = cmp.mapping.select_prev_item(cmp_select),
+                    ['<C-n>']     = cmp.mapping.select_next_item(cmp_select),
+                    ['<CR>']      = cmp.mapping.confirm({ select = true }),
                     ['<C-Space>'] = cmp.mapping.complete(),
                 }),
             }
@@ -52,27 +74,11 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(ev)
                     opts = { buffer = ev.buf, remap = false }
-                    vim.keymap.set("n", "gd",  vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "<leader>vd",  vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "[d",  vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "]d",  vim.diagnostic.goto_prev, opts)
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
                     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
-                end,
-            })
-            local auto_format = vim.api.nvim_create_augroup("AutoFormat", { clear = false })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = { "*.py" },
-                group = auto_format,
-                callback = function(ev)
-                    vim.lsp.buf.code_action({
-                        context = { only = { "source.fixAll.ruff" } },
-                        apply = true,
-                    })
-                    vim.lsp.buf.code_action({
-                        context = { only = { "source.organizeImports" } },
-                        apply = true,
-                    })
-                    vim.lsp.buf.format { async = true }
                 end,
             })
         end
