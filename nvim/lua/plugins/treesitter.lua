@@ -2,6 +2,7 @@ return {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = ":TSUpdate",
+    lazy = false,
     -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
     opts = {
         ensure_installed = {
@@ -11,17 +12,21 @@ return {
         }
     },
     config = function(_, opts)
-        TS = require("nvim-treesitter")
-        TS.install(opts.ensure_installed)
+        local ts = require("nvim-treesitter")
+        ts.install(opts.ensure_installed)
         vim.api.nvim_create_autocmd('FileType', {
-            pattern = opts.ensure_installed,
-            callback = function()
-                -- syntax highlighting, provided by Neovim
-                vim.treesitter.start()
-                -- folds, provided by Neovim
-                vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-                -- indentation, provided by nvim-treesitter
-                vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+            pattern = "*", -- Wildcard allows graceful failing/succeeding based on parser availability
+            callback = function(args)
+                -- Start treesitter; abort setup if no parser exists for the filetype
+                local ok = pcall(vim.treesitter.start, args.buf)
+                if not ok then return end
+
+                -- Folds
+                vim.opt_local.foldmethod = 'indent'
+                vim.opt_local.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+
+                -- Indentation
+                vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
             end,
         })
     end,
