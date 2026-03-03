@@ -3,12 +3,19 @@ return {
     branch = "main",
     build = ":TSUpdate",
     lazy = false,
-    -- https://github.com/nvim-treesitter/nvim-treesitter/tree/main?tab=readme-ov-file#supported-features
     opts = {
         ensure_installed = {
             "python",
             "rust",
             "bash",
+            "go",
+            "lua",
+            "json",
+            "yaml",
+            "haskell",
+            "cpp",
+            "hyprlang",
+            "ini"
         }
     },
     config = function(_, opts)
