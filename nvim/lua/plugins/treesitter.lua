@@ -15,7 +15,8 @@ return {
             "haskell",
             "cpp",
             "hyprlang",
-            "ini"
+            "ini",
+            "helm"
         }
     },
     config = function(_, opts)
