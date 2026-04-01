@@ -9,7 +9,7 @@ return {
             chat = {
                 adapter = {
                     name = "copilot",
-                    model = "claude-opus-4.6",
+                    model = "claude-haiku-4.5",
                 }
             },
         },

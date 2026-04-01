@@ -29,7 +29,8 @@ return {
                     -- To organize the imports.
                     "ruff_organize_imports",
                 },
-                go = { "goimports", "gofmt" }
+                go = { "goimports", "gofmt" },
+                haskell = { "fourmolu" }
             },
             format_on_save = {
                 -- These options will be passed to conform.format()
@@ -67,6 +68,11 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
+        opts = {
+            servers = {
+                copilot = { enabled = false },
+            },
+        },
         config = function()
             vim.diagnostic.config({
                 virtual_text = true,
