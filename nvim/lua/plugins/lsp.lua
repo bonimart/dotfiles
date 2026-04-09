@@ -28,7 +28,6 @@ return {
     {
         'hrsh7th/nvim-cmp',
         opts = function()
-            vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
             local cmp = require('cmp')
             local cmp_select = { behavior = cmp.SelectBehavior.Select }
             return {
@@ -55,11 +54,17 @@ return {
     {
         'neovim/nvim-lspconfig',
         config = function()
+            local servers = { "ruff", "ty", "gopls" }
+
+            vim.lsp.config("*", {
+                capabilities = require("cmp_nvim_lsp").default_capabilities(),
+            })
+
             vim.diagnostic.config({
                 virtual_text = true,
             })
 
-            for _, server in ipairs({ "ruff", "ty", "gopls" }) do
+            for _, server in ipairs(servers) do
                 vim.lsp.enable(server)
             end
 
