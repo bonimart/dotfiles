@@ -4,20 +4,6 @@ return {
         opts = {}
     },
     {
-        'mason-org/mason-lspconfig.nvim',
-        opts = {
-            ensure_installed = {
-                'ruff',
-                'ty',
-                'gopls',
-            }
-        },
-        dependencies = {
-            'mason-org/mason.nvim',
-            'neovim/nvim-lspconfig',
-        },
-    },
-    {
         "stevearc/conform.nvim",
         opts = {
             formatters_by_ft = {
@@ -68,23 +54,23 @@ return {
     },
     {
         'neovim/nvim-lspconfig',
-        opts = {
-            servers = {
-                copilot = { enabled = false },
-            },
-        },
         config = function()
             vim.diagnostic.config({
                 virtual_text = true,
             })
+
+            for _, server in ipairs({ "ruff", "ty", "gopls" }) do
+                vim.lsp.enable(server)
+            end
+
             vim.api.nvim_create_autocmd('LspAttach', {
                 callback = function(ev)
-                    opts = { buffer = ev.buf, remap = false }
-                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
-                    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+                    local map_opts = { buffer = ev.buf, remap = false }
+                    vim.keymap.set("n", "gd", vim.lsp.buf.definition, map_opts)
+                    vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, map_opts)
+                    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, map_opts)
+                    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, map_opts)
+                    vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, map_opts)
                 end,
             })
         end

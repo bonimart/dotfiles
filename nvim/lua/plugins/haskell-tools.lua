@@ -1,4 +1,4 @@
 return {
     'mrcjkb/haskell-tools.nvim',
-    lazy = false,
+    ft = { "haskell", "lhaskell", "cabal" },
 }

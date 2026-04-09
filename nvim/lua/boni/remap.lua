@@ -29,6 +29,7 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 -- format code based on lsp
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>u", "<cmd>undolist<CR>")
 
 -- quick fix list navigation
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
