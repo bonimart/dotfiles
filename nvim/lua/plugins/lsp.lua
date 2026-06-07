@@ -16,7 +16,8 @@ return {
                     "ruff_organize_imports",
                 },
                 go = { "goimports", "gofmt" },
-                haskell = { "fourmolu" }
+                haskell = { "fourmolu" },
+                elm = { "elm-format" },
             },
             format_on_save = {
                 -- These options will be passed to conform.format()
@@ -54,7 +55,7 @@ return {
     {
         'neovim/nvim-lspconfig',
         config = function()
-            local servers = { "ruff", "ty", "gopls" }
+            local servers = { "ruff", "ty", "gopls", "csharp_ls", "elmls", "clangd", "protols", "zls", "tinymist"}
 
             vim.lsp.config("*", {
                 capabilities = require("cmp_nvim_lsp").default_capabilities(),
@@ -73,8 +74,6 @@ return {
                     local map_opts = { buffer = ev.buf, remap = false }
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, map_opts)
                     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, map_opts)
-                    vim.keymap.set("n", "[d", vim.diagnostic.goto_next, map_opts)
-                    vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, map_opts)
                     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, map_opts)
                 end,
             })
