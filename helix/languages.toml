@@ -1,0 +1,46 @@
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+[language-server.ty]
+command = "ty"
+args = ["server"]
+[[language]]
+name = "python"
+language-servers = ["ruff", "ty"]
+auto-format = true
+
+[language-server.haskell-language-server]
+command = "haskell-language-server-wrapper"
+args = ["--lsp"]
+[[language]]
+name = "haskell"
+language-servers = [ "haskell-language-server" ]
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "--config", "/home/boni/.config/taplo.toml", "stdio"]
+[[language]]
+name = "toml"
+language-servers = ["taplo"]
+auto-format = true
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
+[language-server.tflint]
+command = "tflint"
+args = ["--langserver"]
+[[language]]
+name="hcl"
+language-servers=["terraform-ls", "tflint"]
+auto-format = true
+formatter = { command = "terraform", args = ["fmt", "-"] }
+[[language]]
+name="tfvars"
+language-servers=["terraform-ls"]
+
+[language-server.lua-language-server]
+command = "lua-language-server"
+[[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
