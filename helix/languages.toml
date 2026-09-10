@@ -14,7 +14,7 @@ command = "haskell-language-server-wrapper"
 args = ["--lsp"]
 [[language]]
 name = "haskell"
-language-servers = [ "haskell-language-server" ]
+language-servers = ["haskell-language-server"]
 
 [language-server.taplo]
 command = "taplo"
@@ -31,13 +31,13 @@ args = ["serve"]
 command = "tflint"
 args = ["--langserver"]
 [[language]]
-name="hcl"
-language-servers=["terraform-ls", "tflint"]
+name = "hcl"
+language-servers = ["terraform-ls", "tflint"]
 auto-format = true
 formatter = { command = "terraform", args = ["fmt", "-"] }
 [[language]]
-name="tfvars"
-language-servers=["terraform-ls"]
+name = "tfvars"
+language-servers = ["terraform-ls"]
 
 [language-server.lua-language-server]
 command = "lua-language-server"
