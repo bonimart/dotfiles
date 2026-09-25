@@ -44,3 +44,16 @@ command = "lua-language-server"
 [[language]]
 name = "lua"
 language-servers = ["lua-language-server"]
+
+[[language]]
+name = "latex"
+language-servers = ["texlab"]
+auto-format = true
+
+[language-server.texlab]
+command = "texlab"
+
+[language-server.texlab.config.texlab.build]
+executable = "latexmk"
+args = ["-pdfxe", "-interaction=nonstopmode", "-synctex=1", "%f"]
+onSave = true
