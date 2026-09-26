@@ -77,7 +77,7 @@
         "format-muted": "<span color='#f9e2af'>󰖁</span>  {format_source} ",
         "format-source": "󰍬",
         "format-source-muted": "<span color='#f9e2af'>󰍭</span>",
-        "on-click": "ghostty --title=pulsemixer -e pulsemixer"
+        "on-click": "hyprpwcenter"
     },
     "group/hardware": {
         "orientation": "horizontal",
